@@ -1,0 +1,67 @@
+<?php if ($this->article && $this->article->published): ?>
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+  <?php if ($this->headline): ?>
+    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+  <?php endif; ?>
+
+  <div class="apparelManagerArticle block">
+
+    <div class="manufacturer"><?php echo $this->article->manufacturer; ?></div>
+    <div class="name"><?php echo $this->article->name; ?></div>
+    <div class="type">(<?php echo $this->type; ?>)</div>
+
+    <div class="image">
+      <div class="inner">
+        <a href="<?php echo $this->images[0]->path; ?>" data-lightbox="lb<?php echo $this->id; ?>" title="<?php echo $this->images[0]->name; ?>"><img title="<?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['zoom']; ?>" src="<?php echo Image::get($this->images[0]->path, 0, 240, 'proportional'); ?>"></a>
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="inner">
+        <h4><?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['details']; ?></h4>
+        <ul>
+        <?php foreach($this->details as $detail): ?>
+          <li><?php echo $detail; ?></li>
+        <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+     
+  <?php if (!empty($this->variantNames)): ?>
+    <div class="sizes">
+      <div class="inner">
+        <h4><?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['sizes']; ?></h4>
+        <p><?php echo implode(", ", $this->variantNames); ?></p>
+      <?php if ($this->showStock): ?>
+        <a class="stock"><?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['stock']; ?></a>
+        <ul class="stock">
+        <?php foreach($this->variants as $variant): ?>
+          <li><span class="variant"><?php echo $variant->name; ?></span><span class="amount <?php if ($variant->stock == 0): ?>amount-0<?php elseif ($variant->stock < 5): ?>amount-lt-5<?php else: ?>amount-ge-5<?php endif; ?>"><?php echo sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_unit'], $variant->stock); ?></span></li>
+        <?php endforeach; ?>
+        </ul>
+      <?php endif; ?>
+      </div>
+    </div>
+  <?php endif; ?>
+   
+    <div class="images">
+      <div class="inner">
+        <h4><?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['images']; ?></h4>
+      <?php foreach($this->images as $image): ?>
+        <a href="<?php echo $image->path; ?>" data-lightbox="lb<?php echo $this->id; ?>" title="<?php echo $image->name; ?>"><img title="<?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['zoom']; ?>" src="<?php echo Image::get($image->path, 35, 47, 'proportional'); ?>"></a>
+      <?php endforeach; ?>
+      </div>
+    </div>
+
+    <div class="price">
+      <div class="inner">
+        <h4><?php echo $GLOBALS['TL_LANG']['ApparelManager']['CTE']['price']; ?></h4>
+        <div class="price-value"><?php echo sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $this->article->price); ?></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<?php endif; ?>

@@ -1,0 +1,24 @@
+TODO
+
+# article
+- product link (optional)
+- comment (optional)
+
+# article variant
+- comment (optional)
+
+# order
+- new field "shippingPrice"  --> do it via special category and create an arcticle
+- update stock when changing variant
+- update stock when deleting order
+- add function to show order overview for years
+
+# order item
+- comment (optional)
+
+# content element
+- apparel article
+-- im BE rendern wie unter MGMT View
+
+# notification
+- add tokens for BE user, creator
