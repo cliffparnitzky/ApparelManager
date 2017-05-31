@@ -1,0 +1,35 @@
+{
+	"name":"cliffparnitzky/apparel-manager",
+	"description":"Provides a module to manage sports apparel incl. the stock management.",
+	"keywords":["contao","apparel"],
+	"type":"contao-module",
+	"license":"LGPL-3.0+",
+	"authors":[
+		{
+			"name":"Cliff Parnitzky",
+			"email":"contao@cliff-parnitzky.de",
+			"role":"Developer"
+		}
+	],
+	"support":{
+		"email":"contao@cliff-parnitzky.de",
+		"issues":"https://github.com/cliffparnitzky/ApparelManager/issues",
+		"source":"https://github.com/cliffparnitzky/ApparelManager"
+	},
+	"require":{
+		"php":">=5.3",
+		"contao/core":">=3.5.0,<3.6",
+		"contao-community-alliance/composer-plugin":"~2.0",
+		"terminal42/notification_center":"~1.4"
+	}
+	"extra":{
+		"contao":{
+			"sources":{
+				"system/modules/ApparelManager":"system/modules/ApparelManager"
+			}
+		},
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}
