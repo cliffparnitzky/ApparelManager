@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_apparel_article'] = array
   'palettes' => array
   (
     '__selector__' => array(),
-    'default'      => '{category_legend},category;{apparel_legend},manufacturer,name,number,type,details,price,productLink;{media_legend},images;{stock_legend},autoUpdateStock;{publish_legend},published'
+    'default'      => '{category_legend},category;{apparel_legend},manufacturer,name,number,type,details,price,productLink;{media_legend},images;{stock_legend},autoUpdateStock;{comment_legend:hide},comment;{publish_legend},published'
   ),
 
   // Fields
@@ -237,6 +237,15 @@ $GLOBALS['TL_DCA']['tl_apparel_article'] = array
       'inputType'               => 'checkbox',
       'eval'                    => array('tl_class'=>'w50', 'doNotCopy'=>true),
       'sql'                     => "char(1) NOT NULL default ''"
+    ),
+    'comment' => array
+    (
+      'label'                   => &$GLOBALS['TL_LANG']['tl_apparel_article']['comment'],
+      'search'                  => true,
+      'exclude'                 => true,
+      'inputType'               => 'textarea',
+      'eval'                    => array('tl_class'=>'clr', 'style'=>'min-height:60px'),
+      'sql'                     => "text NULL"
     ),
     'published' => array
     (

@@ -35,12 +35,14 @@ $GLOBALS['TL_LANG']['tl_apparel_order_item']['apparealArticleVariant'] = array('
 $GLOBALS['TL_LANG']['tl_apparel_order_item']['amount']                 = array('Menge', 'Geben Sie die bestellte Menge an.');
 $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice']           = array('Spezialpreis', 'Geben Sie den Spezialpreis des Kleidungsstücks an (ohne Nachkommastellen).');
 $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment']    = array('Spezialpreis-Kommentar', 'Geben Sie einen Kommentar zum Spezialpreis an.');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['comment']                = array('Kommentar', 'Geben Sie einen Kommentar zur Bestellposition an.');
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_apparel_order_item']['article_legend'] = 'Bekleidung';
 $GLOBALS['TL_LANG']['tl_apparel_order_item']['price_legend']   = 'Preis';
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['comment_legend'] = 'Kommentar';
 
 /**
  * Buttons

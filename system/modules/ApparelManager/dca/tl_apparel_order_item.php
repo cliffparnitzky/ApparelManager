@@ -115,7 +115,7 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
   'palettes' => array
   (
     '__selector__' => array('type'),
-    'default'      => '{article_legend},apparealArticle;{price_legend},specialPrice,specialPriceComment'
+    'default'      => '{article_legend},apparealArticle;{price_legend},specialPrice,specialPriceComment;{comment_legend:hide},comment'
   ),
 
   // Fields
@@ -200,6 +200,15 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
       'inputType'               => 'text',
       'eval'                    => array('maxlength'=>512, 'tl_class'=>'w50'),
       'sql'                     => "varchar(512) NOT NULL default ''"
+    ),
+    'comment' => array
+    (
+      'label'                   => &$GLOBALS['TL_LANG']['tl_apparel_order_item']['comment'],
+      'search'                  => true,
+      'exclude'                 => true,
+      'inputType'               => 'textarea',
+      'eval'                    => array('tl_class'=>'clr', 'style'=>'min-height:60px'),
+      'sql'                     => "text NULL"
     )
   )
 );

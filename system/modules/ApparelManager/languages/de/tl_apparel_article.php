@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_apparel_article']['price']           = array('Preis', 'G
 $GLOBALS['TL_LANG']['tl_apparel_article']['productLink']     = array('Produktlink', 'Geben Sie einen Link zum Produkt ein.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['images']          = array('Bilder', 'Wählen Sie die Bilder zum Kleidungsstück aus. Die jeweilge Größe (B x H) muss 2 x 3 sein, also z.B. 400 x 600px, 700 x 1050px oder 1000 x 1500px.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['autoUpdateStock'] = array('Lagerbestand automatisch aktualisieren', 'Wählen Sie ob der Lagerbestand beim Bestellen automatisch aktualisiert werden soll.');
+$GLOBALS['TL_LANG']['tl_apparel_article']['comment']         = array('Kommentar', 'Geben Sie einen Kommentar zum Kleidungsstück an.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['published']       = array('Veröffentlichen', 'Das Kleidungsstück veröffentlichen, um eine Ausgabe im Frontend zu ermöglichen.');
 
 /**
@@ -49,6 +50,7 @@ $GLOBALS['TL_LANG']['tl_apparel_article']['category_legend'] = 'Kategorisierung'
 $GLOBALS['TL_LANG']['tl_apparel_article']['apparel_legend']  = 'Kleidungsdaten';
 $GLOBALS['TL_LANG']['tl_apparel_article']['media_legend']    = 'Medien';
 $GLOBALS['TL_LANG']['tl_apparel_article']['stock_legend']    = 'Lagerhaltung';
+$GLOBALS['TL_LANG']['tl_apparel_article']['comment_legend']  = 'Kommentar';
 $GLOBALS['TL_LANG']['tl_apparel_article']['publish_legend']  = 'Veröffentlichung';
 
 /**

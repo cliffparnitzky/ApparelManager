@@ -32,6 +32,7 @@
  */
 $GLOBALS['TL_LANG']['tl_apparel_article_variant']['name']      = array('Name', 'Geben Sie den Namen der Variante an.');
 $GLOBALS['TL_LANG']['tl_apparel_article_variant']['stock']     = array('Lagerbestand', 'Geben Sie den Bestand der Variante im Lager an.');
+$GLOBALS['TL_LANG']['tl_apparel_article_variant']['comment']   = array('Kommentar', 'Geben Sie einen Kommentar zur Variante an.');
 $GLOBALS['TL_LANG']['tl_apparel_article_variant']['published'] = array('Veröffentlichen', 'Die Variante veröffentlichen, um sie benutzen zu können.');
 
 /**
@@ -39,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_apparel_article_variant']['published'] = array('Veröffe
  */
 $GLOBALS['TL_LANG']['tl_apparel_article_variant']['name_legend']    = 'Bezeichnung';
 $GLOBALS['TL_LANG']['tl_apparel_article_variant']['stock_legend']   = 'Lagerhaltung';
+$GLOBALS['TL_LANG']['tl_apparel_article_variant']['comment_legend'] = 'Kommentar';
 $GLOBALS['TL_LANG']['tl_apparel_article_variant']['publish_legend'] = 'Veröffentlichung';
 
 /**
