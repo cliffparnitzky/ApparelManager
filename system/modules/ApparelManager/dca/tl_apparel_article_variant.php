@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_apparel_article_variant'] = array
       'fields'                  => array('sorting'),
       'flag'                    => 1,
       'panelLayout'             => 'filter;sort,search,limit',
-      'headerFields'            => array('category', 'manufacturer', 'name', 'number', 'name', 'type', 'details', 'price', 'images'),
+      'headerFields'            => array('category', 'manufacturer', 'name', 'number', 'name', 'type', 'details', 'price', 'productLink', 'images'),
       'header_callback'         => array('tl_apparel_article_variant', 'prepareHeader'),
       'child_record_callback'   => array('tl_apparel_article_variant', 'prepareChild'),
       'child_record_class'      => 'no_padding'
@@ -213,6 +213,9 @@ class tl_apparel_article_variant extends Backend
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['type'][0]] = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['type'][0]] . ' <img src="system/modules/ApparelManager/assets/type_' . $typeKey . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$typeKey] . '" />';
 
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['price'][0]] = sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['price'][0]]);
+    
+    $productLink = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0]];
+    $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0]] = (!empty($productLink) ? '<a href="' . $productLink . '" target="_blank">' .  trim(\String::substr($productLink, 70)) . '</a>' : '&nbsp;');
   
     // add images
     $imageWidth = 60;

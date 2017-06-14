@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['tl_apparel_article']['number']          = array('Artikelnum
 $GLOBALS['TL_LANG']['tl_apparel_article']['type']            = array('Art', 'Geben Sie die Art, für wen das Kleidungsstück bestimmt ist, an.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['details']         = array('Details', 'Geben Sie Details zum Kleidungsstücks an.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['price']           = array('Preis', 'Geben Sie den Preis des Kleidungsstücks an (ohne Nachkommastellen).');
+$GLOBALS['TL_LANG']['tl_apparel_article']['productLink']     = array('Produktlink', 'Geben Sie einen Link zum Produkt ein.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['images']          = array('Bilder', 'Wählen Sie die Bilder zum Kleidungsstück aus. Die jeweilge Größe (B x H) muss 2 x 3 sein, also z.B. 400 x 600px, 700 x 1050px oder 1000 x 1500px.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['autoUpdateStock'] = array('Lagerbestand automatisch aktualisieren', 'Wählen Sie ob der Lagerbestand beim Bestellen automatisch aktualisiert werden soll.');
 $GLOBALS['TL_LANG']['tl_apparel_article']['published']       = array('Veröffentlichen', 'Das Kleidungsstück veröffentlichen, um eine Ausgabe im Frontend zu ermöglichen.');

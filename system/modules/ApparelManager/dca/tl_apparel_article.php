@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_apparel_article'] = array
   'palettes' => array
   (
     '__selector__' => array(),
-    'default'      => '{category_legend},category;{apparel_legend},manufacturer,name,number,type,details,price;{media_legend},images;{stock_legend},autoUpdateStock;{publish_legend},published'
+    'default'      => '{category_legend},category;{apparel_legend},manufacturer,name,number,type,details,price,productLink;{media_legend},images;{stock_legend},autoUpdateStock;{publish_legend},published'
   ),
 
   // Fields
@@ -206,6 +206,15 @@ $GLOBALS['TL_DCA']['tl_apparel_article'] = array
       'inputType'               => 'text',
       'eval'                    => array('mandatory'=>true, 'maxlength'=>3, 'tl_class'=>'clr w50', 'rgxp'=>'digit'),
       'sql'                     => "varchar(3) NOT NULL default ''"
+    ),
+    'productLink' => array
+    (
+      'label'                   => &$GLOBALS['TL_LANG']['tl_apparel_article']['productLink'],
+      'exclude'                 => true,
+      'search'                  => true,
+      'inputType'               => 'text',
+      'eval'                    => array('tl_class'=>'clr long', 'rgxp'=>'url', 'decodeEntities'=>true),
+      'sql'                     => "varchar(1024) NOT NULL default ''"
     ),
     'images' => array
     (
@@ -303,6 +312,7 @@ class tl_apparel_article extends Backend
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['type'][0] . ':</span></td><td>' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$row['type']] . ' <img src="system/modules/ApparelManager/assets/type_' . $row['type'] . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$row['type']] . '" /></td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['details'][0] . ':</span></td><td>- ' . implode('<br>- ', deserialize($row['details'], true)) . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['price'][0] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['price']) . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0] . ':</span></td><td>' . (!empty($row['productLink']) ? '<a href="' . $row['productLink'] . '" target="_blank">' .  trim(\String::substr($row['productLink'], 70)) . '</a>' : '&nbsp;') . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['stock'] . ':</span></td><td>' . $stock . '</td></tr>
   </table>
 </div>' . "\n";
