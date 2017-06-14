@@ -280,42 +280,9 @@ class tl_apparel_article extends Backend
    */
   public function prepareLabel($row, $label, DataContainer $dc, $args)
   {
-    $stock = "";
-    
-    $objApparelArticleVariants = \ApparelArticleVariantModel::findPublishedByPid($row['id'], array('order' => "sorting"));
-    if ($objApparelArticleVariants == null)
-    {
-      $stock = '<span class="tl_warn_no_child_elements">' . $GLOBALS['TL_LANG']['tl_apparel_article']['warn_no_published_variants'] . '</span>';
-    }
-    else
-    {
-      $stock = \ApparelManagerHelper::getArticleVariantsHtml($objApparelArticleVariants);
-    }
-    
-    $imageWidth = 80;
-    $imageHeight = 120;
-    $imageSrc = "";
-    $arrImages = deserialize($row['images'], true);
-    if (count($arrImages) > 0)
-    {
-      $objFile = \FilesModel::findByUuid($arrImages[0]);
-      $imageSrc = \Image::get($objFile->path, $imageWidth, $imageHeight, 'proportional');
-    }
+    $objApparelArticle = \ApparelArticleModel::findByPk($row['id']);
 
-    return '
-<div class="cte_type ' . ($row['published'] ? 'published' : 'unpublished') . '">' . $row['manufacturer'] . '</div>
-<div>
-  <h2>' . $row['name'] . '</h2>
-  <img class="apparel_image" src="' . $imageSrc . '" width="' . $imageWidth . '" height="' . $imageHeight . '" />
-  <table class="tl_apparel_child">
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['number'][0] . ':</span></td><td>' . $row['number'] . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['type'][0] . ':</span></td><td>' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$row['type']] . ' <img src="system/modules/ApparelManager/assets/type_' . $row['type'] . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$row['type']] . '" /></td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['details'][0] . ':</span></td><td>- ' . implode('<br>- ', deserialize($row['details'], true)) . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['price'][0] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['price']) . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0] . ':</span></td><td>' . (!empty($row['productLink']) ? '<a href="' . $row['productLink'] . '" target="_blank">' .  trim(\String::substr($row['productLink'], 70)) . '</a>' : '&nbsp;') . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['stock'] . ':</span></td><td>' . $stock . '</td></tr>
-  </table>
-</div>' . "\n";
+    return '<div class="cte_type ' . ($row['published'] ? 'published' : 'unpublished') . '">' . $row['manufacturer'] . '</div>' . \ApparelManagerHelper::getArticleHtml($objApparelArticle, true) . "\n";
   }
   
   /**

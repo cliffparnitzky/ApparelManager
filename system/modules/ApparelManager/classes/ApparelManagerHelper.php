@@ -341,6 +341,50 @@ class ApparelManagerHelper extends \Controller
   }
   
   /**
+   * Create the HTML table of the article.
+   */
+  public static function getArticleHtml($objApparelArticle, $includeStock=false)
+  {
+    $GLOBALS['TL_CSS'][] = 'system/modules/ApparelManager/assets/apparel_manager_be.css';
+    \System::loadLanguageFile('tl_apparel_article');
+    
+    $stock = "";
+    
+    $objApparelArticleVariants = \ApparelArticleVariantModel::findPublishedByPid($objApparelArticle->id, array('order' => "sorting"));
+    if ($objApparelArticleVariants == null)
+    {
+      $stock = '<span class="tl_warn_no_child_elements">' . $GLOBALS['TL_LANG']['tl_apparel_article']['warn_no_published_variants'] . '</span>';
+    }
+    else
+    {
+      $stock = \ApparelManagerHelper::getArticleVariantsHtml($objApparelArticleVariants);
+    }
+    
+    $imageWidth = 80;
+    $imageHeight = 120;
+    $imageSrc = "";
+    $arrImages = deserialize($objApparelArticle->images, true);
+    if (count($arrImages) > 0)
+    {
+      $objFile = \FilesModel::findByUuid($arrImages[0]);
+      $imageSrc = \Image::get($objFile->path, $imageWidth, $imageHeight, 'proportional');
+    }
+    
+    return '<div>
+  <h2>' . $objApparelArticle->name . '</h2>
+  <img class="apparel_image" src="' . $imageSrc . '" width="' . $imageWidth . '" height="' . $imageHeight . '" />
+  <table class="tl_apparel_child">
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['number'][0] . ':</span></td><td>' . $objApparelArticle->number . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['type'][0] . ':</span></td><td>' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$objApparelArticle->type] . ' <img src="system/modules/ApparelManager/assets/type_' . $objApparelArticle->type . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$objApparelArticle->type] . '" /></td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['details'][0] . ':</span></td><td>- ' . implode('<br>- ', deserialize($objApparelArticle->details, true)) . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['price'][0] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $objApparelArticle->price) . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0] . ':</span></td><td>' . (!empty($objApparelArticle->productLink) ? '<a href="' . $objApparelArticle->productLink . '" target="_blank">' .  trim(\String::substr($objApparelArticle->productLink, 70)) . '</a>' : '&nbsp;') . '</td></tr>
+    ' . ($includeStock ? '<tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['stock'] . ':</span></td><td>' . $stock . '</td></tr>' : '') . '
+  </table>
+</div>';
+  }
+  
+  /**
    * Create the title for an article.
    */
   public static function getArticleTitleSimple($objApparelArticle, $blnLinkArticle=false)

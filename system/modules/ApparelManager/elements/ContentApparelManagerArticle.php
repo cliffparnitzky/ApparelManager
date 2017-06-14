@@ -56,14 +56,8 @@ class ContentApparelManagerArticle extends \ContentElement
   {
     if (TL_MODE == 'BE')
     {
-      $objTemplate = new \BackendTemplate('be_wildcard');
-
       $objApparelArticle = \ApparelArticleModel::findByPk($this->apparelManagerArticle);
-
-      $objTemplate->wildcard = \ApparelManagerHelper::getArticleTitleWithNumber($objApparelArticle);
-      $objTemplate->title = $this->headline;
-
-      return $objTemplate->parse();
+      return \ApparelManagerHelper::getArticleHtml($objApparelArticle);
     }
 
     return parent::generate();
