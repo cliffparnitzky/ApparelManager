@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_apparel_article_variant'] = array
       'fields'                  => array('sorting'),
       'flag'                    => 1,
       'panelLayout'             => 'filter;sort,search,limit',
-      'headerFields'            => array('category', 'manufacturer', 'name', 'number', 'name', 'type', 'details', 'price', 'productLink', 'images'),
+      'headerFields'            => array('category', 'manufacturer', 'name', 'number', 'type', 'details', 'price', 'productLink', 'images'),
       'header_callback'         => array('tl_apparel_article_variant', 'prepareHeader'),
       'child_record_callback'   => array('tl_apparel_article_variant', 'prepareChild'),
       'child_record_class'      => 'no_padding'
@@ -217,15 +217,15 @@ class tl_apparel_article_variant extends Backend
   public function prepareHeader($arrHeaderFields, DataContainer $dc)
   {
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['category'][0]] = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['category'][0]];
-    
+
     $typeKey = array_search($arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['type'][0]], $GLOBALS['TL_LANG']['ApparelManager']['type']);
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['type'][0]] = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['type'][0]] . ' <img src="system/modules/ApparelManager/assets/type_' . $typeKey . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['type'][$typeKey] . '" />';
 
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['price'][0]] = sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['price'][0]]);
-    
+
     $productLink = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0]];
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0]] = (!empty($productLink) ? '<a href="' . $productLink . '" target="_blank">' .  trim(\String::substr($productLink, 70)) . '</a>' : '&nbsp;');
-  
+
     // add images
     $imageWidth = 60;
     $imageHeight = 90;
@@ -241,9 +241,20 @@ class tl_apparel_article_variant extends Backend
     }
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['images'][0]] = $images;
     
+    // ensure correct order (due to order problemes, this hack is needed)
+    $strKeyProduktLink = $GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0];
+    $strKeyImages = $GLOBALS['TL_LANG']['tl_apparel_article']['images'][0];
+    $entryProduktLink = $arrHeaderFields[$strKeyProduktLink];
+    $entryImages = $arrHeaderFields[$strKeyImages];
+    unset($arrHeaderFields[$strKeyProduktLink]);
+    unset($arrHeaderFields[$strKeyImages]);
+    $arrHeaderFields[$strKeyProduktLink] = $entryProduktLink;
+    $arrHeaderFields[$strKeyImages] = $entryImages;
+
+    // adding the total stock value
     $objApparelArticleVariants = \ApparelArticleVariantModel::findPublishedByPid($dc->id);
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['totalStock']] = sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_unit'], \ApparelManagerHelper::getVariantsTotal($objApparelArticleVariants));
-    
+
     return $arrHeaderFields;
   }
 
@@ -255,7 +266,7 @@ class tl_apparel_article_variant extends Backend
   public function prepareChild($row)
   {
     // TODO calculate real stock
-    
+
     return '
 <div class="cte_type ' . ($row['published'] ? 'published' : 'unpublished') . '">' . $GLOBALS['TL_LANG']['tl_apparel_article_variant']['variant'] . '</div>
 <div>
