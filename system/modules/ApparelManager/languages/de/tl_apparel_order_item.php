@@ -47,12 +47,13 @@ $GLOBALS['TL_LANG']['tl_apparel_order_item']['comment_legend'] = 'Kommentar';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_apparel_order_item']['new']        = array('Neue Bestellposition', 'Eine neue Bestellposition für die Bestellung anlegen');
-$GLOBALS['TL_LANG']['tl_apparel_order_item']['pastenew']   = array('Neue Bestellposition oben erstellen', 'Eine neue Bestellposition nach Bestellposition ID %s für die Bestellung erstellen');
-$GLOBALS['TL_LANG']['tl_apparel_order_item']['show']       = array('Details der Bestellposition', 'Details der Bestellposition ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_apparel_order_item']['edit']       = array('Bestellposition bearbeiten', 'Bestellposition ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_apparel_order_item']['cut']        = array('Bestellposition verschieben', 'Bestellposition ID %s verschieben');
-$GLOBALS['TL_LANG']['tl_apparel_order_item']['delete']     = array('Bestellposition löschen', 'Bestellposition ID %s löschen');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['new']         = array('Neue Bestellposition', 'Eine neue Bestellposition für die Bestellung anlegen');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['pastenew']    = array('Neue Bestellposition oben erstellen', 'Eine neue Bestellposition nach Bestellposition ID %s für die Bestellung erstellen');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['show']        = array('Details der Bestellposition', 'Details der Bestellposition ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['edit']        = array('Bestellposition bearbeiten', 'Bestellposition ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['cut']         = array('Bestellposition verschieben', 'Bestellposition ID %s verschieben');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['delete']      = array('Bestellposition löschen', 'Bestellposition ID %s löschen');
+$GLOBALS['TL_LANG']['tl_apparel_order_item']['showArticle'] = array('Artikel anzeigen', 'Artikel der Bestellposition ID %s anzeigen');
 
 /**
  * Misc

@@ -102,6 +102,13 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
         'icon'                => 'delete.gif',
         'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
       ),
+      'showArticle' => array
+      (
+        'label'               => &$GLOBALS['TL_LANG']['tl_apparel_order_item']['showArticle'],
+        'icon'                => 'system/modules/ApparelManager/assets/icon_apparel_article.png',
+        'attributes'          => 'onclick="Backend.openModalIframe({\'width\':768,\'title\':\'' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['showArticle'][0] . '\',\'url\':this.href});return false"',
+        'button_callback'     => array('tl_apparel_order_item', 'showArticle')
+      ),
       'show' => array
       (
         'label'               => &$GLOBALS['TL_LANG']['tl_apparel_order_item']['show'],
@@ -403,6 +410,23 @@ class tl_apparel_order_item extends Backend
       \Message::addConfirmation(sprintf($GLOBALS['TL_LANG']['MSC']['apparel_order_item_increasedStockSuccess'], $dc->activeRecord->apparealArticleVariant, $dc->activeRecord->amount));
     }
   }
+  
+  /**
+   * Return the show article button
+   *
+   * @param array  $row
+   * @param string $href
+   * @param string $label
+   * @param string $title
+   * @param string $icon
+   * @param string $attributes
+   *
+   * @return string
+   */
+  public function showArticle($row, $href, $label, $title, $icon, $attributes)
+  {
+    return '<a href="'.$this->addToUrl('do=apparel_article&amp;table=tl_apparel_article_variant&amp;id='.$row['apparealArticle']).'&amp;popup=1" title="'.specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+  } 
 }
 
 ?>
