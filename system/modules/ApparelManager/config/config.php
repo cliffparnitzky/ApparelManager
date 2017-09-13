@@ -66,10 +66,10 @@ $GLOBALS['TL_CTE']['apparelManager']['apparelManagerArticle'] = 'ContentApparelM
  * Notification Center Notification Types
  */
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['ApparelManager']['InvoiceNotification'] = array(
-  'recipients'          => array('admin_email','customer_email'),
-  'email_recipient_cc'  => array('admin_email','customer_email'),
-  'email_recipient_bcc' => array('admin_email','customer_email'),
-  'email_replyTo'       => array('admin_email'),
+  'recipients'          => array('admin_email','customer_email','user_email','creator_email'),
+  'email_recipient_cc'  => array('admin_email','customer_email','user_email','creator_email'),
+  'email_recipient_bcc' => array('admin_email','customer_email','user_email','creator_email'),
+  'email_replyTo'       => array('admin_email','user_email','creator_email'),
   'email_subject'       => array('customer_*', 'order_*'),
   'email_text'          => array('customer_*', 'order_*', 'order_positions_text', 'order_total'),
   'email_html'          => array('customer_*', 'order_*', 'order_positions_html', 'order_total')

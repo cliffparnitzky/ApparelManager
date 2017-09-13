@@ -31,6 +31,8 @@
  * Tokens
  */
 $GLOBALS['TL_LANG']['NOTIFICATION_CENTER_TOKEN']['InvoiceNotification']['customer_email']       = 'E-Mail-Adresse des Bestellers (Mitglied).';
+$GLOBALS['TL_LANG']['NOTIFICATION_CENTER_TOKEN']['InvoiceNotification']['user_email']           = 'E-Mail-Adresse des angemeldeten Backend Benutzers.';
+$GLOBALS['TL_LANG']['NOTIFICATION_CENTER_TOKEN']['InvoiceNotification']['creator_email']        = 'E-Mail-Adresse des Erstellers der Bestellung.';
 $GLOBALS['TL_LANG']['NOTIFICATION_CENTER_TOKEN']['InvoiceNotification']['customer_*']           = 'Alle Werte des Bestellers (Mitglied).';
 $GLOBALS['TL_LANG']['NOTIFICATION_CENTER_TOKEN']['InvoiceNotification']['order_*']              = 'Alle Werte der Bestellung.';
 $GLOBALS['TL_LANG']['NOTIFICATION_CENTER_TOKEN']['InvoiceNotification']['order_positions_text'] = 'Die Bestellpositionen als Text Liste.';

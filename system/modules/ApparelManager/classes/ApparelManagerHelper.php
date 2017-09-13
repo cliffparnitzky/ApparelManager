@@ -512,6 +512,13 @@ class ApparelManagerHelper extends \Controller
     $arrTokens = array();
     // Administrator e-mail
     $arrTokens['admin_email'] = \Config::get('adminEmail');
+    
+    // User e-mail
+    $arrTokens['user_email'] = \BackendUser::getInstance()->email;
+    
+    // Creator e-mail
+    $objCreator = $objApparelOrder->getRelated('createdBy'); 
+    $arrTokens['creator_email'] = $objCreator->email;
 
     // Customer tokens
     foreach ($objMember->row() as $strFieldName => $strFieldValue)
