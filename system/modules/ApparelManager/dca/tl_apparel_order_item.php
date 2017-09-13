@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
       'fields'                  => array('sorting'),
       'flag'                    => 1,
       'panelLayout'             => 'filter;sort,search,limit',
-      'headerFields'            => array('number', 'member', 'status', 'orderDate', 'deliverDate', 'invoiceDate'),
+      'headerFields'            => array('number', 'member', 'status', 'orderDate', 'deliverDate', 'invoiceDate', 'comment'),
       'header_callback'         => array('tl_apparel_order_item', 'prepareHeader'),
       'child_record_callback'   => array('tl_apparel_order_item', 'prepareChild'),
       'child_record_class'      => 'no_padding'
@@ -251,6 +251,9 @@ class tl_apparel_order_item extends Backend
     $statusKey = array_search($arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['status'][0]], $GLOBALS['TL_LANG']['ApparelManager']['status']);
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['status'][0]] = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['status'][0]] . ' <img src="system/modules/ApparelManager/assets/status_' . $statusKey . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['status'][$statusKey] . '" />';
     
+    $comment = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0]];
+    $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0]] = (!empty($comment) ? trim(\String::substr($comment, 70)) : '&nbsp;');
+    
     $objApparelOrder = \ApparelOrderModel::findByPk(\Input::get('id'));
     $arrHeaderFields[$GLOBALS['TL_LANG']['MSC']['ApparelManager']['creation']] = sprintf($GLOBALS['TL_LANG']['MSC']['ApparelManager']['creation_format'], date(\Config::get('dateFormat'), $objApparelOrder->createdAt), \UserModel::findByPk($objApparelOrder->createdBy)->name);
 
@@ -278,7 +281,8 @@ class tl_apparel_order_item extends Backend
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['amount'][0] . ':</span></td><td>' . $row['amount'] . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['originalPrice'] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $objApparelArticle->price) . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice'][0] . ':</span></td><td>' . ($row['specialPrice'] ? sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['specialPrice']) : "") . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . $row['specialPriceComment'] . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . (!empty($row['specialPriceComment']) ? trim(\String::substr($row['specialPriceComment'], 70)) : '&nbsp;') . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? trim(\String::substr($row['comment'], 70)) : '&nbsp;') . '</td></tr>
   </table>
 </div>' . "\n";
   }

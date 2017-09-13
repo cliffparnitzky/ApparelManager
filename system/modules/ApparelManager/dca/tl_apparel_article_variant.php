@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_apparel_article_variant'] = array
       'fields'                  => array('sorting'),
       'flag'                    => 1,
       'panelLayout'             => 'filter;sort,search,limit',
-      'headerFields'            => array('category', 'manufacturer', 'name', 'number', 'type', 'details', 'price', 'productLink', 'images'),
+      'headerFields'            => array('category', 'manufacturer', 'name', 'number', 'type', 'details', 'price', 'productLink', 'images', 'comment'),
       'header_callback'         => array('tl_apparel_article_variant', 'prepareHeader'),
       'child_record_callback'   => array('tl_apparel_article_variant', 'prepareChild'),
       'child_record_class'      => 'no_padding'
@@ -240,16 +240,23 @@ class tl_apparel_article_variant extends Backend
       }
     }
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['images'][0]] = $images;
+
+    $comment = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['comment'][0]];
+    $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_article']['comment'][0]] = (!empty($comment) ? trim(\String::substr($comment, 70)) : '&nbsp;');
     
     // ensure correct order (due to order problemes, this hack is needed)
     $strKeyProduktLink = $GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0];
     $strKeyImages = $GLOBALS['TL_LANG']['tl_apparel_article']['images'][0];
+    $strComment = $GLOBALS['TL_LANG']['tl_apparel_article']['comment'][0];
     $entryProduktLink = $arrHeaderFields[$strKeyProduktLink];
     $entryImages = $arrHeaderFields[$strKeyImages];
+    $entryComment = $arrHeaderFields[$strComment];
     unset($arrHeaderFields[$strKeyProduktLink]);
     unset($arrHeaderFields[$strKeyImages]);
+    unset($arrHeaderFields[$strComment]);
     $arrHeaderFields[$strKeyProduktLink] = $entryProduktLink;
     $arrHeaderFields[$strKeyImages] = $entryImages;
+    $arrHeaderFields[$strComment] = $entryComment;
 
     // adding the total stock value
     $objApparelArticleVariants = \ApparelArticleVariantModel::findPublishedByPid($dc->id);
@@ -273,6 +280,7 @@ class tl_apparel_article_variant extends Backend
   <h2>' . $row['name'] . '</h2>
   <table class="tl_apparel_child">
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article_variant']['stock'][0] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_unit'], $row['stock']) . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article_variant']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? trim(\String::substr($row['comment'], 70)) : '&nbsp;') . '</td></tr>
   </table>
 </div>' . "\n";
   }

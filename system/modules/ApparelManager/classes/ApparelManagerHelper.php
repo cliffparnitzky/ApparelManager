@@ -379,6 +379,7 @@ class ApparelManagerHelper extends \Controller
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['details'][0] . ':</span></td><td>- ' . implode('<br>- ', deserialize($objApparelArticle->details, true)) . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['price'][0] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $objApparelArticle->price) . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['productLink'][0] . ':</span></td><td>' . (!empty($objApparelArticle->productLink) ? '<a href="' . $objApparelArticle->productLink . '" target="_blank">' .  trim(\String::substr($objApparelArticle->productLink, 70)) . '</a>' : '&nbsp;') . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['comment'][0] . ':</span></td><td>' . (!empty($objApparelArticle->comment) ? trim(\String::substr($objApparelArticle->comment, 70)) : '&nbsp;') . '</td></tr>
     ' . ($includeStock ? '<tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_article']['stock'] . ':</span></td><td>' . $stock . '</td></tr>' : '') . '
   </table>
 </div>';
