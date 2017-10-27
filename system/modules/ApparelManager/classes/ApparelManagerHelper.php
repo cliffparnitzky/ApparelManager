@@ -293,7 +293,7 @@ class ApparelManagerHelper extends \Controller
       $positions .= '<td style="text-align: center; padding: 3px; border-right: 1px solid #afafaf; border-top: 1px solid #afafaf;">' . $objApparelArticleVariant->name . '</td>';
       $positions .= '<td style="text-align: center; padding: 3px; border-right: 1px solid #afafaf; border-top: 1px solid #afafaf;">' . $objApparelOrderItem->amount . '</td>';
       $price = $objApparelArticle->price;
-      if (!empty($objApparelOrderItem->specialPrice))
+      if ($objApparelOrderItem->specialPrice != null)
       {
         $price = $objApparelOrderItem->specialPrice;
       }
@@ -323,7 +323,7 @@ class ApparelManagerHelper extends \Controller
         $objApparelArticle = \ApparelArticleModel::findByPk($objApparelOrderItem->apparealArticle);
 
         $price = $objApparelArticle->price;
-        if (!empty($objApparelOrderItem->specialPrice))
+        if ($objApparelOrderItem->specialPrice != null)
         {
           $price = $objApparelOrderItem->specialPrice;
         }

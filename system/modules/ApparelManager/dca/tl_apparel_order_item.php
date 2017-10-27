@@ -280,7 +280,7 @@ class tl_apparel_order_item extends Backend
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['apparealArticleVariant'][0] . ':</span></td><td>' . $objApparelArticleVariant->name . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['amount'][0] . ':</span></td><td>' . $row['amount'] . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['originalPrice'] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $objApparelArticle->price) . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice'][0] . ':</span></td><td>' . ($row['specialPrice'] ? sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['specialPrice']) : "") . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice'][0] . ':</span></td><td>' . ($row['specialPrice'] != null ? sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['specialPrice']) : "") . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . (!empty($row['specialPriceComment']) ? trim(\StringUtil::substr($row['specialPriceComment'], 70)) : '&nbsp;') . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? trim(\StringUtil::substr($row['comment'], 70)) : '&nbsp;') . '</td></tr>
   </table>
