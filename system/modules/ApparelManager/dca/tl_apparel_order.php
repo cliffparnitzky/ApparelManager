@@ -153,6 +153,7 @@ $GLOBALS['TL_DCA']['tl_apparel_order'] = array
       'label'                   => &$GLOBALS['TL_LANG']['tl_apparel_order']['number'],
       'exclude'                 => true,
       'search'                  => true,
+      'sorting'                 => true,
       'inputType'               => 'text',
       'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50', 'unique'=>true, 'alwaysSave'=>true),
       'load_callback'           => array(array('tl_apparel_order', 'getNextNumber')),
