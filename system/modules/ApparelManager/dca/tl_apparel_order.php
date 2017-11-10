@@ -309,7 +309,7 @@ class tl_apparel_order extends Backend
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order']['orderDate'][0] . ':</span></td><td>' . date(\Config::get('dateFormat'), $row['orderDate']) . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order']['deliverDate'][0] . ':</span></td><td>' . ($row['deliverDate'] ? date(\Config::get('dateFormat'), $row['deliverDate']) : '-') . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order']['invoiceDate'][0] . ':</span></td><td>' . ($row['invoiceDate'] ? date(\Config::get('dateFormat'), $row['invoiceDate']) : '-') . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? trim(\StringUtil::substr($row['comment'], 70)) : '&nbsp;') . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? \ApparelManagerHelper::trimLongText($row['comment']) : '&nbsp;') . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['MSC']['ApparelManager']['creation'] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['ApparelManager']['creation_format'], date(\Config::get('dateFormat'), $row['createdAt']), \UserModel::findByPk($row['createdBy'])->name) . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['MSC']['ApparelManager']['items'] . ':</span></td><td>' . $positions . '</td></tr>
   </table>

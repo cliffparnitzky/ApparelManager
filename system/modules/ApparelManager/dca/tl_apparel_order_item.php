@@ -267,7 +267,7 @@ class tl_apparel_order_item extends Backend
     $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['status'][0]] = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['status'][0]] . ' <img src="system/modules/ApparelManager/assets/status_' . $statusKey . '.png" alt="' . $GLOBALS['TL_LANG']['ApparelManager']['status'][$statusKey] . '" />';
     
     $comment = $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0]];
-    $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0]] = (!empty($comment) ? trim(\StringUtil::substr($comment, 70)) : '&nbsp;');
+    $arrHeaderFields[$GLOBALS['TL_LANG']['tl_apparel_order']['comment'][0]] = (!empty($comment) ? \ApparelManagerHelper::trimLongText($comment) : '&nbsp;');
     
     $objApparelOrder = \ApparelOrderModel::findByPk(\Input::get('id'));
     $arrHeaderFields[$GLOBALS['TL_LANG']['MSC']['ApparelManager']['creation']] = sprintf($GLOBALS['TL_LANG']['MSC']['ApparelManager']['creation_format'], date(\Config::get('dateFormat'), $objApparelOrder->createdAt), \UserModel::findByPk($objApparelOrder->createdBy)->name);
@@ -300,11 +300,11 @@ class tl_apparel_order_item extends Backend
     {
       $strReturn .= '
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice'][0] . ':</span></td><td>' . ($row['specialPrice'] != null ? sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['specialPrice']) : "") . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . (!empty($row['specialPriceComment']) ? trim(\StringUtil::substr($row['specialPriceComment'], 70)) : '&nbsp;') . '</td></tr>';
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . (!empty($row['specialPriceComment']) ? \ApparelManagerHelper::trimLongText($row['specialPriceComment']) : '&nbsp;') . '</td></tr>';
     }
     
       $strReturn .= '
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? trim(\StringUtil::substr($row['comment'], 70)) : '&nbsp;') . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? \ApparelManagerHelper::trimLongText($row['comment']) : '&nbsp;') . '</td></tr>
   </table>
 </div>' . "\n";
     return $strReturn;
