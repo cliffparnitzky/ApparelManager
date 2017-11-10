@@ -121,9 +121,15 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
   // Palettes
   'palettes' => array
   (
-    '__selector__' => array('type'),
-    'default'      => '{article_legend},apparealArticle;{price_legend},specialPrice,specialPriceComment;{comment_legend:hide},comment'
+    '__selector__' => array('type', 'hasSpecialPrice'),
+    'default'                 => '{article_legend},apparealArticle;{price_legend},hasSpecialPrice;{comment_legend:hide},comment'
   ),
+  
+  // Subpalettes
+  'subpalettes' => array
+  (
+    'hasSpecialPrice'         => 'specialPrice,specialPriceComment'
+  ), 
 
   // Fields
   'fields' => array
@@ -190,13 +196,22 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
       ),
       'sql'                     => "varchar(3) NOT NULL default ''"
     ),
+    'hasSpecialPrice' => array
+    (
+      'label'                   => &$GLOBALS['TL_LANG']['tl_apparel_order_item']['hasSpecialPrice'],
+      'exclude'                 => true,
+      'filter'                  => true,
+      'inputType'               => 'checkbox',
+      'eval'                    => array('submitOnChange'=>true),
+      'sql'                     => "char(1) NOT NULL default ''"
+    ),
     'specialPrice' => array
     (
       'label'                   => &$GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice'],
       'exclude'                 => true,
       'search'                  => true,
       'inputType'               => 'text',
-      'eval'                    => array('maxlength'=>3, 'tl_class'=>'clr w50', 'rgxp'=>'digit'),
+      'eval'                    => array('mandatory'=>true, 'maxlength'=>3, 'tl_class'=>'clr w50', 'rgxp'=>'digit'),
       'sql'                     => "varchar(3) NOT NULL default ''"
     ),
     'specialPriceComment' => array
@@ -205,7 +220,7 @@ $GLOBALS['TL_DCA']['tl_apparel_order_item'] = array
       'exclude'                 => true,
       'search'                  => true,
       'inputType'               => 'text',
-      'eval'                    => array('maxlength'=>512, 'tl_class'=>'w50'),
+      'eval'                    => array('mandatory'=>true, 'maxlength'=>512, 'tl_class'=>'w50'),
       'sql'                     => "varchar(512) NOT NULL default ''"
     ),
     'comment' => array
@@ -273,18 +288,26 @@ class tl_apparel_order_item extends Backend
     $objApparelArticle = \ApparelArticleModel::findByPk($row['apparealArticle']);
     $objApparelArticleVariant = \ApparelArticleVariantModel::findByPk($row['apparealArticleVariant']);
 
-    return '
+    $strReturn = '
 <div>
   <h2>' . \ApparelManagerHelper::getArticleTitleWithNumber($objApparelArticle) . '</h2>
   <table class="tl_apparel_child">
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['apparealArticleVariant'][0] . ':</span></td><td>' . $objApparelArticleVariant->name . '</td></tr>
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['amount'][0] . ':</span></td><td>' . $row['amount'] . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['originalPrice'] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $objApparelArticle->price) . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['originalPrice'] . ':</span></td><td>' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $objApparelArticle->price) . '</td></tr>';
+    
+    if ($row['hasSpecialPrice'])
+    {
+      $strReturn .= '
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPrice'][0] . ':</span></td><td>' . ($row['specialPrice'] != null ? sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $row['specialPrice']) : "") . '</td></tr>
-    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . (!empty($row['specialPriceComment']) ? trim(\StringUtil::substr($row['specialPriceComment'], 70)) : '&nbsp;') . '</td></tr>
+    <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['specialPriceComment'][0] . ':</span></td><td>' . (!empty($row['specialPriceComment']) ? trim(\StringUtil::substr($row['specialPriceComment'], 70)) : '&nbsp;') . '</td></tr>';
+    }
+    
+      $strReturn .= '
     <tr><td><span class="tl_label">' . $GLOBALS['TL_LANG']['tl_apparel_order_item']['comment'][0] . ':</span></td><td>' . (!empty($row['comment']) ? trim(\StringUtil::substr($row['comment'], 70)) : '&nbsp;') . '</td></tr>
   </table>
 </div>' . "\n";
+    return $strReturn;
   }
 
   /**

@@ -244,7 +244,7 @@ class ApparelManagerHelper extends \Controller
       $objApparelArticleVariant = \ApparelArticleVariantModel::findByPk($objApparelOrderItem->apparealArticleVariant);
 
       $price = $objApparelArticle->price;
-      if (!empty($objApparelOrderItem->specialPrice))
+      if ($objApparelOrderItem->hasSpecialPrice)
       {
         $price = $objApparelOrderItem->specialPrice;
       }
@@ -293,11 +293,13 @@ class ApparelManagerHelper extends \Controller
       $positions .= '<td style="text-align: center; padding: 3px; border-right: 1px solid #afafaf; border-top: 1px solid #afafaf;">' . $objApparelArticleVariant->name . '</td>';
       $positions .= '<td style="text-align: center; padding: 3px; border-right: 1px solid #afafaf; border-top: 1px solid #afafaf;">' . $objApparelOrderItem->amount . '</td>';
       $price = $objApparelArticle->price;
-      if ($objApparelOrderItem->specialPrice != null)
+      $priceComment = '';
+      if ($objApparelOrderItem->hasSpecialPrice)
       {
         $price = $objApparelOrderItem->specialPrice;
+        $priceComment = sprintf($GLOBALS['TL_LANG']['MSC']['apparel_order_item_price_comment'], $objApparelOrderItem->specialPriceComment);
       }
-      $positions .= '<td style="text-align: right; padding: 3px; border-right: 1px solid #afafaf; border-top: 1px solid #afafaf;">' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $price) . '</td>';
+      $positions .= '<td style="text-align: right; padding: 3px; border-right: 1px solid #afafaf; border-top: 1px solid #afafaf;">' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $price) . $priceComment . '</td>';
       $positions .= '<td style="text-align: right; padding: 3px; border-top: 1px solid #afafaf;">' . sprintf($GLOBALS['TL_LANG']['MSC']['apparel_article_price'], $price * $objApparelOrderItem->amount) . '</td>';
       $positions .= '</tr>';
     }
@@ -323,7 +325,7 @@ class ApparelManagerHelper extends \Controller
         $objApparelArticle = \ApparelArticleModel::findByPk($objApparelOrderItem->apparealArticle);
 
         $price = $objApparelArticle->price;
-        if ($objApparelOrderItem->specialPrice != null)
+        if ($objApparelOrderItem->hasSpecialPrice)
         {
           $price = $objApparelOrderItem->specialPrice;
         }

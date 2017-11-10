@@ -58,6 +58,7 @@ $GLOBALS['TL_LANG']['MSC']['apparel_article_title_simple']      = "%s - %s (%s)"
 $GLOBALS['TL_LANG']['MSC']['apparel_article_title_with_number'] = "%s - %s (%s) | Art. Nr.: %s";
 $GLOBALS['TL_LANG']['MSC']['apparel_order_invoiceConfirm']      = "Soll die Bestellung ID %s wirklich abgerechnet werden?";
 $GLOBALS['TL_LANG']['MSC']['apparel_order_invoiceSuccess']      = "Die Bestellung ID %s wurde abgerechnet.";
+$GLOBALS['TL_LANG']['MSC']['apparel_order_item_price_comment']  = "<br>(%s)";
 
 $GLOBALS['TL_LANG']['MSC']['apparel_order_item_increasedStockSuccess'] = "Lagerbestand für %s - %s um %s erhöht.";
 $GLOBALS['TL_LANG']['MSC']['apparel_order_item_decreasedStockSuccess'] = "Lagerbestand für %s - %s um %s vermindert.";
